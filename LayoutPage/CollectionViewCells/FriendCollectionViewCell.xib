@@ -32,7 +32,7 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="65" height="121"/>
             <connections>
-                <outlet property="friendAvatarImage" destination="lyS-Y1-ias" id="0tW-PE-Opb"/>
+                <outlet property="friendAvatarImageView" destination="lyS-Y1-ias" id="0tW-PE-Opb"/>
                 <outlet property="friendNameLabel" destination="mY4-cQ-TY6" id="riT-9x-3w5"/>
             </connections>
             <point key="canvasLocation" x="148.55072463768118" y="143.63839285714286"/>

@@ -7,34 +7,29 @@
 
 import UIKit
 
-class FriendCollectionViewCell: UICollectionViewCell, CustomCell {
+public class FriendCollectionViewCell: UICollectionViewCell, CustomCellProtocol {
     
-    @IBOutlet weak var friendAvatarImage: UIImageView!
+    @IBOutlet weak var friendAvatarImageView: UIImageView!
     @IBOutlet weak var friendNameLabel: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-    
     func configure(name: String, image: UIImage) {
-        generateFriendAvatarImage(image: image)
-        self.friendNameLabel.text = name
+        renderFriendAvatarImage(image: image)
+        friendNameLabel.text = name
     }
     
-    func generateFriendAvatarImage(image: UIImage) {
-        self.friendAvatarImage.image = image
-        self.friendAvatarImage.layer.borderWidth = 1
-        self.friendAvatarImage.layer.masksToBounds = false
-        self.friendAvatarImage.layer.borderColor = UIColor.black.cgColor
-        self.friendAvatarImage.layer.cornerRadius = friendAvatarImage.frame.height/2
-        self.friendAvatarImage.clipsToBounds = true
+    func renderFriendAvatarImage(image: UIImage) {
+        friendAvatarImageView.image = image
+        friendAvatarImageView.layer.borderWidth = 1
+        friendAvatarImageView.layer.masksToBounds = false
+        friendAvatarImageView.layer.borderColor = UIColor.black.cgColor
+        friendAvatarImageView.layer.cornerRadius = friendAvatarImageView.frame.height / 2
+        friendAvatarImageView.clipsToBounds = true
     }
     
-    static func cellNib() -> UINib? {
+    public static func cellNib() -> UINib? {
         return UINib(nibName: String(describing: self), bundle: nil)
     }
-    static func cellIdentifier() -> String {
+    public static func cellIdentifier() -> String {
         return String(describing: self)
     }
 }

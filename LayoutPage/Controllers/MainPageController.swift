@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainPageController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+public class MainPageController: UIViewController {
     
     @IBOutlet weak var photoCollectionView: UICollectionView!
     @IBOutlet weak var editButton: UIButton!
@@ -19,49 +19,8 @@ class MainPageController: UIViewController, UICollectionViewDelegate, UICollecti
     var photos: [UIImage] = []
     let friendCellWidth = 75
     let friendCellHeight = 128
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        fillFriendsArray()
-        fillPhotosArray()
-        userAvatarImageRender()
-        editButtonRender()
-      
-        friendCollectionView.registerCustomCell(FriendCollectionViewCell.self)
-        photoCollectionView.registerCustomCell(PhotoCollectionViewCell.self)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == self.friendCollectionView {
-            return friends.count
-        } else {
-            return photos.count
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == self.friendCollectionView {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FriendCollectionViewCell.cellIdentifier(), for: indexPath) as! FriendCollectionViewCell
-            
-            let friend = friends[indexPath.row]
-            cell.configure(name: friend.name, image: friend.image)
-            
-            return cell
-        } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCell.cellIdentifier(), for: indexPath) as! PhotoCollectionViewCell
-            
-            cell.configure(image: photos[indexPath.row])
-            
-            return cell
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if collectionView == self.photoCollectionView {
-            return layoutSettings(customLayout: collectionViewLayout, collectionView: photoCollectionView)
-        } else {
-            return CGSize(width: friendCellWidth, height: friendCellHeight)
-        }
+    enum MainPageControllerException: Error {
+        case layerSettings
     }
     
     func fillFriendsArray() {
@@ -71,7 +30,6 @@ class MainPageController: UIViewController, UICollectionViewDelegate, UICollecti
         friends.append(FriendUserModel(image: #imageLiteral(resourceName: "hpXWIXc_CqY.jpg"), name: "Vladik Suhoruchenko"))
         friends.append(FriendUserModel(image: #imageLiteral(resourceName: "icRoEonhfE8.jpg"), name: "Kirill Yanuskin"))
         friends.append(FriendUserModel(image: #imageLiteral(resourceName: "yvUe3VuA5i4.jpg"), name: "Nikita Belyaev"))
-        numberOfFriendsLabel.text = String(friends.count)
     }
     
     func fillPhotosArray() {
@@ -99,14 +57,68 @@ class MainPageController: UIViewController, UICollectionViewDelegate, UICollecti
         editButton.layer.borderColor = UIColor.black.cgColor
     }
     
-    func layoutSettings(customLayout: UICollectionViewLayout, collectionView: UICollectionView) -> CGSize {
+    func layoutSettings(customLayout: UICollectionViewLayout, collectionView: UICollectionView) throws -> CGSize {
         let noOfCellsInRow = 3
-        let flowLayout = customLayout as! UICollectionViewFlowLayout
+        guard let flowLayout = customLayout as? UICollectionViewFlowLayout else {
+            throw MainPageControllerException.layerSettings
+        }
         let totalSpace = flowLayout.sectionInset.left
             + flowLayout.sectionInset.right
             + (flowLayout.minimumInteritemSpacing * CGFloat(noOfCellsInRow - 1))
         let size = Int((collectionView.bounds.width - totalSpace) / CGFloat(noOfCellsInRow))
         
         return CGSize(width: size, height: size)
+    }
+    
+    public override func viewDidLoad() {
+        super.viewDidLoad()
+        fillFriendsArray()
+        fillPhotosArray()
+        userAvatarImageRender()
+        editButtonRender()
+        numberOfFriendsLabel.text = String(friends.count)
+      
+        friendCollectionView.registerCustomCell(FriendCollectionViewCell.self)
+        photoCollectionView.registerCustomCell(PhotoCollectionViewCell.self)
+    }
+}
+
+extension MainPageController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if collectionView == self.friendCollectionView {
+            return friends.count
+        } else {
+            return photos.count
+        }
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if collectionView == self.friendCollectionView {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FriendCollectionViewCell.cellIdentifier(), for: indexPath) as! FriendCollectionViewCell
+            
+            let friend = friends[indexPath.row]
+            cell.configure(name: friend.name, image: friend.image)
+            
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCell.cellIdentifier(), for: indexPath) as! PhotoCollectionViewCell
+            
+            cell.configure(image: photos[indexPath.row])
+            
+            return cell
+        }
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if collectionView == self.photoCollectionView {
+            do {
+                return try layoutSettings(customLayout: collectionViewLayout, collectionView: photoCollectionView)
+            } catch {
+                return CGSize()
+            }
+        } else {
+            return CGSize(width: friendCellWidth, height: friendCellHeight)
+        }
     }
 }

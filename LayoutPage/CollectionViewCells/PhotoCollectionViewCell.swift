@@ -7,30 +7,19 @@
 
 import UIKit
 
-protocol CustomCell {
-    
-    static func cellNib() -> UINib?
-    
-    static func cellIdentifier() -> String
-}
-
-class PhotoCollectionViewCell: UICollectionViewCell, CustomCell {
+public class PhotoCollectionViewCell: UICollectionViewCell, CustomCellProtocol {
 
     @IBOutlet weak var photoImageView: UIImageView!
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
     
     func configure(image: UIImage) {
-        self.photoImageView.image = image
+        photoImageView.image = image
     }
     
-    static func cellNib() -> UINib? {
+    public static func cellNib() -> UINib? {
         return UINib(nibName: String(describing: self), bundle: nil)
     }
     
-    static func cellIdentifier() -> String {
+    public static func cellIdentifier() -> String {
         return String(describing: self)
     }
 }

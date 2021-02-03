@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 extension UICollectionView {
-    func registerCustomCell(_ cell: CustomCell.Type) {
+    func registerCustomCell(_ cell: CustomCellProtocol.Type) {
         self.register(cell.cellNib(), forCellWithReuseIdentifier: cell.cellIdentifier())
     }
 }

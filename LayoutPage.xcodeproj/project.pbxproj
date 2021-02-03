@@ -13,7 +13,8 @@
 		063F0FB825C8266500926046 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 063F0FB625C8266500926046 /* Main.storyboard */; };
 		063F0FBA25C8266700926046 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 063F0FB925C8266700926046 /* Assets.xcassets */; };
 		063F0FBD25C8266700926046 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 063F0FBB25C8266700926046 /* LaunchScreen.storyboard */; };
-		063F0FC925C87D1800926046 /* UIMainPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063F0FC825C87D1800926046 /* UIMainPageController.swift */; };
+		063F0FC925C87D1800926046 /* MainPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063F0FC825C87D1800926046 /* MainPageController.swift */; };
+		066E2E0525CAACF900AC839A /* CustomCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066E2E0425CAACF900AC839A /* CustomCellProtocol.swift */; };
 		06DD94CA25C9966E00194BFE /* FriendUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DD94C925C9966E00194BFE /* FriendUserModel.swift */; };
 		06DD94E125C9AAD100194BFE /* FriendCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DD94DF25C9AAD100194BFE /* FriendCollectionViewCell.swift */; };
 		06DD94E225C9AAD100194BFE /* FriendCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06DD94E025C9AAD100194BFE /* FriendCollectionViewCell.xib */; };
@@ -32,7 +33,8 @@
 		063F0FB925C8266700926046 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		063F0FBC25C8266700926046 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		063F0FBE25C8266700926046 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		063F0FC825C87D1800926046 /* UIMainPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIMainPageController.swift; sourceTree = "<group>"; };
+		063F0FC825C87D1800926046 /* MainPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageController.swift; sourceTree = "<group>"; };
+		066E2E0425CAACF900AC839A /* CustomCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCellProtocol.swift; sourceTree = "<group>"; };
 		06DD94C925C9966E00194BFE /* FriendUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendUserModel.swift; sourceTree = "<group>"; };
 		06DD94DF25C9AAD100194BFE /* FriendCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCollectionViewCell.swift; sourceTree = "<group>"; };
 		06DD94E025C9AAD100194BFE /* FriendCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 		063F0FAF25C8266500926046 /* LayoutPage */ = {
 			isa = PBXGroup;
 			children = (
+				066E2E0325CAACC800AC839A /* Protocols */,
 				063F0FB025C8266500926046 /* AppDelegate.swift */,
 				063F0FB225C8266500926046 /* SceneDelegate.swift */,
 				0672ED7825CA0D7000E22EC6 /* Controllers */,
@@ -91,11 +94,19 @@
 			path = LayoutPage;
 			sourceTree = "<group>";
 		};
+		066E2E0325CAACC800AC839A /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				066E2E0425CAACF900AC839A /* CustomCellProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		0672ED7825CA0D7000E22EC6 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				063F0FB425C8266500926046 /* ViewController.swift */,
-				063F0FC825C87D1800926046 /* UIMainPageController.swift */,
+				063F0FC825C87D1800926046 /* MainPageController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -246,9 +257,10 @@
 				063F0FB525C8266500926046 /* ViewController.swift in Sources */,
 				063F0FB125C8266500926046 /* AppDelegate.swift in Sources */,
 				063F0FB325C8266500926046 /* SceneDelegate.swift in Sources */,
+				066E2E0525CAACF900AC839A /* CustomCellProtocol.swift in Sources */,
 				06DD94EA25CA012C00194BFE /* CollectionViewExtension.swift in Sources */,
 				06DD94E625C9CA6600194BFE /* PhotoCollectionViewCell.swift in Sources */,
-				063F0FC925C87D1800926046 /* UIMainPageController.swift in Sources */,
+				063F0FC925C87D1800926046 /* MainPageController.swift in Sources */,
 				06DD94CA25C9966E00194BFE /* FriendUserModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
